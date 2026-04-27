@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>석준수 개인 업무 매뉴얼</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="is-locked">
+    <div class="password-screen" id="passwordScreen">
+      <form class="password-box" id="passwordForm">
+        <h1>IT콜센터 로그인</h1>
+        <label>
+          <span class="sr-only">비밀번호</span>
+          <input id="passwordInput" type="password" autocomplete="current-password" placeholder="비밀번호를 입력하세요" required />
+        </label>
+        <p class="password-error" id="passwordError" role="alert"></p>
+        <button class="primary-action" type="submit">로그인</button>
+      </form>
+    </div>
+
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="매뉴얼 분류">
+        <div class="brand">
+          <span class="brand-mark">M</span>
+          <div>
+            <strong>업무 매뉴얼</strong>
+            <span>Company Guide</span>
+          </div>
+        </div>
+
+        <nav class="category-list" id="categoryList">
+          <button class="category is-active" data-category="all">전체</button>
+          <button class="category" data-category="cmcs">CM/CS프로젝트</button>
+          <button class="category" data-category="performance">성과확산</button>
+          <button class="category" data-category="equipment">기자재</button>
+          <button class="category" data-category="etc">일반행정</button>
+          <button class="category" data-category="personalAdmin">개인 행정</button>
+        </nav>
+
+        <div class="quick-note">
+          <strong>오늘의 체크</strong>
+          <p>자주 바뀌는 업무는 “업데이트 필요” 표시를 남겨두면 관리가 쉬워집니다.</p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Internal Knowledge Base</p>
+            <h1>석준수 개인 업무 매뉴얼</h1>
+          </div>
+          <button class="primary-action" id="openFormButton" type="button">+ 매뉴얼 추가</button>
+        </header>
+
+        <section class="search-panel" aria-label="매뉴얼 검색">
+          <label for="searchInput">검색</label>
+          <input id="searchInput" type="search" placeholder="예: CM프로젝트, 자산폐기, 지출결의" />
+        </section>
+
+        <section class="content-grid">
+          <div class="manual-list-panel">
+            <div class="section-header">
+              <h2>매뉴얼 목록</h2>
+              <span id="resultCount">0개</span>
+            </div>
+            <div class="manual-list" id="manualList"></div>
+          </div>
+
+          <article class="manual-detail" id="manualDetail" aria-live="polite"></article>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="manual-dialog" id="manualDialog">
+      <form method="dialog" id="manualForm">
+        <div class="dialog-header">
+          <h2 id="dialogTitle">새 매뉴얼 추가</h2>
+          <button class="icon-button" value="cancel" type="submit" aria-label="닫기">×</button>
+        </div>
+
+        <label>
+          제목
+          <input name="title" required placeholder="예: 신규 거래처 등록 절차" />
+        </label>
+
+        <label>
+          분류
+          <select name="category" required>
+            <option value="cmcs">CM/CS프로젝트</option>
+            <option value="performance">성과확산</option>
+            <option value="equipment">기자재</option>
+            <option value="etc">일반행정</option>
+            <option value="personalAdmin">개인 행정</option>
+          </select>
+        </label>
+
+        <label>
+          담당 부서
+          <select name="owner" required>
+            <option value="SW교육원">SW교육원</option>
+            <option value="AI교육원">AI교육원</option>
+            <option value="AI/SW교육지원팀">AI/SW교육지원팀</option>
+          </select>
+        </label>
+
+        <label>
+          상태
+          <select name="status" required>
+            <option value="정상">정상</option>
+            <option value="업데이트 필요">업데이트 필요</option>
+          </select>
+        </label>
+
+        <label>
+          핵심 절차
+          <textarea name="body" required placeholder="단계별 업무 내용을 입력하세요. 줄바꿈은 그대로 표시됩니다."></textarea>
+        </label>
+
+        <label>
+          참고 링크 또는 파일 위치
+          <input name="reference" placeholder="예: 사내 드라이브 > 정산 > 월말정산.xlsx" />
+        </label>
+
+        <div class="dialog-actions">
+          <button class="secondary-action" value="cancel" type="submit">취소</button>
+          <button class="primary-action" value="default" type="submit" id="saveButton">저장</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="data.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
