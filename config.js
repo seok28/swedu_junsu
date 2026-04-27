@@ -9,7 +9,7 @@ window.manualAppConfig = {
 
   // 정적 페이지에서 동작하는 간단한 접속 비밀번호입니다.
   // 공개 저장소에서는 이 값도 보일 수 있으므로 강한 보안 용도로는 사용하지 마세요.
-  accessPassword: "1234",
+  accessPassword: "8206747",
 
   // 로그인 유지 시간입니다. 기본값은 1시간입니다.
   authTtlMinutes: 60,
