@@ -56,4 +56,4 @@ GitHub Pages, Netlify, Vercel 같은 정적 사이트 호스팅에 위 파일을
 - `performance`: 성과확산
 - `equipment`: 기자재
 - `etc`: 일반행정
-- `personalAdmin`: 개인 행정
+- `personalAdmin`: 개인행정
