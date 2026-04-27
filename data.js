@@ -5,7 +5,7 @@ window.manualSeedData = {
     performance: "성과확산",
     equipment: "기자재",
     etc: "일반행정",
-    personalAdmin: "개인 행정",
+    personalAdmin: "개인행정",
   },
 
   legacyCategoryMap: {
