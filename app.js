@@ -215,8 +215,8 @@ function renderListItem(manual) {
         <span class="tag">${categoryNames[manual.category] || "일반행정"}</span>
         ${favorite}
         ${warning}
-        <span>${escapeHtml(manual.owner)}</span>
-        <span>${manual.updatedAt}</span>
+        <span class="meta-chip">${escapeHtml(manual.owner)}</span>
+        <span class="meta-chip">${manual.updatedAt}</span>
       </span>
     </button>
   `;
