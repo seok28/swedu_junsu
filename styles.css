@@ -502,22 +502,36 @@ h2 {
 }
 
 .manual-meta {
-  display: flex;
-  flex-wrap: wrap;
+   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(78px, max-content));
   gap: 8px;
+  align-items: center;
   color: var(--muted);
   font-size: 13px;
 }
-
-.tag {
+.tag,
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24px;
   border-radius: 999px;
   padding: 4px 8px;
+   white-space: nowrap;
+}
+
+.tag {
   background: #e4ece5;
   color: #365548;
   font-size: 12px;
   font-weight: 700;
 }
-
+.meta-chip {
+  background: #f3f5f1;
+  color: #65716b;
+  font-size: 12px;
+  font-weight: 700;
+}
 .tag.warning {
   background: #fff0e6;
   color: var(--warning);
