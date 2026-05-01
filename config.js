@@ -17,4 +17,7 @@ window.manualAppConfig = {
   // 카카오톡 공유를 사용하려면 카카오 디벨로퍼스 JavaScript 키를 입력하고,
   // 현재 사이트 도메인을 JavaScript SDK 도메인과 제품 링크 도메인에 등록하세요.
   kakaoJavascriptKey: "9d8bebbbbaea67a12499b58d99ca0ec4",
+
+   // 카카오 제품 링크 관리에 등록한 배포 주소입니다.
+  kakaoShareUrl: "https://seok28.github.io/swedu_junsu/",
 };
