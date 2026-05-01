@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>석준수 업무 포털</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="is-locked">
+    <div class="password-screen" id="passwordScreen">
+      <form class="password-box" id="passwordForm">
+        <div class="login-mark">JS</div>
+        <div class="login-badge">AI/SW Education Center</div>
+        <h1>석준수 업무 포털</h1>
+        <p class="login-copy">업무매뉴얼과 놀이 페이지 이용을 위해 비밀번호를 입력하세요.</p>
+        <label>
+          <span class="sr-only">비밀번호</span>
+          <input id="passwordInput" type="password" autocomplete="current-password" placeholder="비밀번호를 입력하세요" required />
+        </label>
+        <p class="password-error" id="passwordError" role="alert"></p>
+        <button class="primary-action" type="submit">로그인</button>
+        <div class="login-footnote">Authorized access only</div>
+      </form>
+    </div>
+
+    <section class="home-view is-hidden" id="homeView">
+      <div class="home-topbar">
+        <div>
+          <p class="eyebrow">Select Page</p>
+          <h1>원하는 페이지를 선택하세요</h1>
+        </div>
+        <button class="secondary-action" id="homeLogoutButton" type="button">로그아웃</button>
+      </div>
+
+      <div class="home-menu" aria-label="페이지 선택">
+        <button class="home-card" id="openManualPageButton" type="button">
+          <span>업무매뉴얼</span>
+          <strong>업무 절차와 참고 위치 확인</strong>
+        </button>
+        <button class="home-card play-card" id="openPlayPageButton" type="button">
+          <span>놀이</span>
+          <strong>포장 업무 인원을 뽑는 미니게임</strong>
+        </button>
+      </div>
+    </section>
+
+    <div class="app-shell is-hidden" id="manualShell">
+      <aside class="sidebar" aria-label="매뉴얼 분류">
+        <div class="brand">
+          <span class="brand-mark">M</span>
+          <div>
+            <strong>업무 매뉴얼</strong>
+            <span>Company Guide</span>
+          </div>
+        </div>
+
+        <nav class="category-list" id="categoryList">
+          <button class="category is-active" data-category="all">전체</button>
+          <button class="category" data-category="cmcs">CM/CS프로젝트</button>
+          <button class="category" data-category="performance">성과확산</button>
+          <button class="category" data-category="equipment">기자재/시설</button>
+          <button class="category" data-category="etc">일반행정</button>
+          <button class="category" data-category="personalAdmin">개인행정</button>
+        </nav>
+
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="pageEyebrow">Internal Knowledge Base</p>
+            <h1 id="pageTitle">석준수 개인 업무 매뉴얼</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="secondary-action" id="manualHomeButton" type="button">처음으로</button>
+            <button class="secondary-action" id="logoutButton" type="button">로그아웃</button>
+            <button class="primary-action" id="openFormButton" type="button">+ 매뉴얼 추가</button>
+          </div>
+        </header>
+
+        <div id="manualView">
+          <section class="search-panel" aria-label="매뉴얼 검색">
+            <label for="searchInput">검색</label>
+            <input id="searchInput" type="search" placeholder="예: CM프로젝트, 자산폐기, 지출결의" />
+          </section>
+
+          <section class="content-grid">
+            <div class="manual-list-panel">
+              <div class="section-header">
+                <h2>매뉴얼 목록</h2>
+                <span id="resultCount">0개</span>
+              </div>
+              <div class="manual-list" id="manualList"></div>
+            </div>
+
+            <article class="manual-detail" id="manualDetail" aria-live="polite"></article>
+          </section>
+        </div>
+
+      </main>
+    </div>
+
+    <section class="play-page is-hidden" id="playPage" aria-label="놀이">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Mini Game</p>
+          <h1>놀이</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="secondary-action" id="playHomeButton" type="button">처음으로</button>
+          <button class="secondary-action" id="playLogoutButton" type="button">로그아웃</button>
+        </div>
+      </header>
+
+      <div class="game-panel">
+        <div class="game-head">
+          <div>
+            <p class="eyebrow">Random Picker</p>
+            <h2>포장 도우미 뽑기</h2>
+          </div>
+          <button class="secondary-action" id="resetPickerButton" type="button">초기화</button>
+        </div>
+
+        <section class="shared-result is-hidden" id="sharedResult">
+          <p>공유된 포장 도우미 결과</p>
+          <h2 id="sharedWinners">-</h2>
+          <span id="sharedMeta"></span>
+        </section>
+
+        <div class="picker-layout">
+          <form class="picker-form" id="pickerForm">
+            <label>
+              참여 인원
+              <textarea id="participantInput" placeholder="이름을 한 줄에 한 명씩 입력하세요.&#10;예: 석준수&#10;김민지&#10;박현우"></textarea>
+            </label>
+
+            <label>
+              뽑을 인원 수
+              <input id="pickCountInput" type="number" min="1" value="1" />
+            </label>
+
+            <button class="primary-action" id="startPickerButton" type="submit">뽑기 시작</button>
+          </form>
+
+          <div class="draw-stage" aria-live="polite">
+            <div class="draw-machine" id="drawMachine">
+              <span>READY</span>
+            </div>
+            <p class="game-message" id="gameMessage">참여 인원과 뽑을 인원 수를 정해 주세요.</p>
+          </div>
+        </div>
+
+        <section class="winner-panel">
+          <div class="section-header">
+            <h3>선정 결과</h3>
+            <div class="result-actions">
+              <span id="winnerCount">0명</span>
+              <button class="secondary-action compact" id="shareResultButton" type="button" disabled>카카오톡 공유</button>
+            </div>
+          </div>
+          <div class="winner-list" id="winnerList">아직 선정된 인원이 없습니다.</div>
+        </section>
+
+        <section class="history-panel">
+          <div class="section-header">
+            <h3>최근 기록</h3>
+            <button class="secondary-action compact" id="clearHistoryButton" type="button">기록 삭제</button>
+          </div>
+          <div class="history-list" id="historyList">최근 기록이 없습니다.</div>
+        </section>
+      </div>
+    </section>
+
+    <dialog class="manual-dialog" id="manualDialog">
+      <form method="dialog" id="manualForm">
+        <div class="dialog-header">
+          <h2 id="dialogTitle">새 매뉴얼 추가</h2>
+          <button class="icon-button" value="cancel" type="submit" aria-label="닫기">×</button>
+        </div>
+
+        <label>
+          제목
+          <input name="title" required placeholder="예: 신규 거래처 등록 절차" />
+        </label>
+
+        <label>
+          분류
+          <select name="category" required>
+            <option value="cmcs">CM/CS프로젝트</option>
+            <option value="performance">성과확산</option>
+            <option value="equipment">기자재/시설</option>
+            <option value="etc">일반행정</option>
+            <option value="personalAdmin">개인행정</option>
+          </select>
+        </label>
+
+        <label>
+          담당 부서
+          <select name="owner" required>
+            <option value="SW교육원">SW교육원</option>
+            <option value="AI교육원">AI교육원</option>
+            <option value="AI/SW교육지원팀">AI/SW교육지원팀</option>
+          </select>
+        </label>
+
+        <label>
+          핵심 절차
+          <textarea name="body" required placeholder="단계별 업무 내용을 입력하세요. 줄바꿈은 그대로 표시됩니다."></textarea>
+        </label>
+
+        <label>
+          참고 링크 또는 파일 위치
+          <input name="reference" placeholder="예: 사내 드라이브 > 정산 > 월말정산.xlsx" />
+        </label>
+
+        <div class="dialog-actions">
+          <button class="secondary-action" value="cancel" type="submit">취소</button>
+          <button class="primary-action" value="default" type="submit" id="saveButton">저장</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.8.0/kakao.min.js" crossorigin="anonymous"></script>
+    <script src="data.js"></script>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
